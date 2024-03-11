@@ -1,0 +1,6 @@
+site_name: API Docs
+site_url: https://github.com/in-anthroponymy
+nav:
+  - Home: index.md
+  - About: about.md
+theme: readthedocs
