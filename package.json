@@ -4,15 +4,14 @@
   "workspaces": [
     "apps/*"
   ],
-  "dependencies": {},
   "devDependencies": {
-    "lerna": "^8.1.2",
     "@stylistic/eslint-plugin-ts": "^1.6.3",
     "@types/lodash": "^4.14.202",
     "copyfiles": "^2.4.1",
-    "dotenv": "^16.4.3",
+    "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "husky": "^9.0.10",
+    "lerna": "^8.1.2",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
@@ -38,5 +37,8 @@
     "relink": "cd node_modules && mv \\@agilysys-stay x && mv x \\@agilysys-stay",
     "test": "lerna run --since --include-merged-tags test",
     "test-all": "lerna run test"
+  },
+  "dependencies": {
+    "jest": "^29.7.0"
   }
 }
