@@ -1,0 +1,42 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "lerna": "^8.1.2",
+    "@stylistic/eslint-plugin-ts": "^1.6.3",
+    "@types/lodash": "^4.14.202",
+    "copyfiles": "^2.4.1",
+    "dotenv": "^16.4.3",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "typescript-eslint": "^7.1.1"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run --since --include-merged-tags build",
+    "build-all": "lerna run build",
+    "clean-all": "lerna run clean && npx rimraf node_modules",
+    "dist": "lerna run --since --include-merged-tags dist",
+    "dist-all": "lerna run dist",
+    "itest": "lerna run --since --include-merged-tags itest",
+    "itest-all": "lerna run itest",
+    "lint-staged": "lint-staged",
+    "next-release": "lerna version prerelease --force-publish --yes",
+    "prepare": "husky",
+    "prerelease-version": "lerna version --conventional-commits --conventional-prerelease --yes",
+    "prettier": "prettier --write **/*.{graphql,gql,json,md,ts,yml}",
+    "publish": "lerna publish from-package --message 'Publish [skip ci]' --yes",
+    "release-version": "lerna version --conventional-commits --conventional-graduate --yes",
+    "release-version-fallback": "lerna version --conventional-commits --yes",
+    "relink": "cd node_modules && mv \\@agilysys-stay x && mv x \\@agilysys-stay",
+    "test": "lerna run --since --include-merged-tags test",
+    "test-all": "lerna run test"
+  }
+}

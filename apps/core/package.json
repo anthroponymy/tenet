@@ -1,0 +1,47 @@
+{
+  "name": "core",
+  "version": "0.0.1",
+  "description": "The base framework to get start with this application",
+  "keywords": [
+    "core"
+  ],
+  "author": "NavinKumar <123103678+anthroponymy@users.noreply.github.com>",
+  "homepage": "https://github.com/anthroponymy/tenet#readme",
+  "license": "ISC",
+  "main": "lib/core.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthroponymy/tenet.git"
+  },
+  "scripts": {
+    "build": "tsc --outDir ./dist --project ./tsconfig-build.json && npm run build:copy-files",
+    "build:copy-files": "copyfiles ./adapter.yml ./dist && copyfiles ./schema/*.avsc ./dist",
+    "check": "tsc --pretty --noEmit --project ./tsconfig.json",
+    "check:itest": "tsc --pretty --noEmit --project ./tsconfig-itest.json",
+    "clean": "rimraf ./dist ./node_modules ./coverage",
+    "coverage": "c8 -reporter=text-lcov npm run test > lcov.info",
+    "dist": "rimraf ./dist && npm run build",
+    "itest": "DOTENV_CONFIG_PATH=.env.itest mocha --config itest/.mocharc.json",
+    "prepublishOnly": "npm run build",
+    "start": "node --loader ts-node/esm -r dotenv/config src/app.ts",
+    "start:dev": "NODE_OPTIONS=--openssl-legacy-provider nodemon --watch src --exec node --loader ts-node/esm -r dotenv/config src/app.ts",
+    "test": "mocha --config test/.mocharc.json"
+  },
+  "bugs": {
+    "url": "https://github.com/anthroponymy/tenet/issues"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@tsconfig/node12": "^12.1.1"
+  }
+}
