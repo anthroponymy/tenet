@@ -5,7 +5,10 @@
 ## Usage
 
 ```
-const core = require('core');
-
-// TODO: DEMONSTRATE API
+npm i moment
+npm i tslib
+npm i axios
+npm i express
+npm i lodash
+npm i helmet
 ```
