@@ -62,7 +62,7 @@ jobs:
           else
             since_param="--include-merged-tags"
             if [[ "${{ inputs.release }}" =~ [tT]rue ]]; then
-              next_release_number="$(jq -r '.agilysys.release.number' package.json)"
+              next_release_number="$(jq -r '.navinkumar.release.number' package.json)"
               if [[ $next_release_number -gt 1 ]]; then
                 since_param="$(printf "r%s" "$(( next_release_number - 1 ))")"
               fi

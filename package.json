@@ -34,7 +34,7 @@
     "publish": "lerna publish from-package --message 'Publish [skip ci]' --yes",
     "release-version": "lerna version --conventional-commits --conventional-graduate --yes",
     "release-version-fallback": "lerna version --conventional-commits --yes",
-    "relink": "cd node_modules && mv \\@agilysys-stay x && mv x \\@agilysys-stay",
+    "relink": "cd node_modules && mv \\@navinkumar-stay x && mv x \\@navinkumar-stay",
     "test": "lerna run --since --include-merged-tags test",
     "test-all": "lerna run test"
   },

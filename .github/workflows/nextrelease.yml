@@ -16,17 +16,17 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git User
-        uses: agilysys-inc/stay-github-actions/setup-git@main
+        uses: navinkumar-inc/stay-github-actions/setup-git@main
 
       - name: Trigger GitHub release
         shell: bash
         run: |
-          release_tag="$(jq -r '.agilysys.release.tag' package.json)"
+          release_tag="$(jq -r '.navinkumar.release.tag' package.json)"
           gh release create "$release_tag" --generate-notes
-          cat <<< $(jq '.agilysys.release.number += 1' package.json) > package.json
-          next_release_number="$(jq -r '.agilysys.release.number' package.json)"
+          cat <<< $(jq '.navinkumar.release.number += 1' package.json) > package.json
+          next_release_number="$(jq -r '.navinkumar.release.number' package.json)"
           next_release_tag="$(printf "r%s" "$next_release_number")"
-          cat <<< $(jq '.agilysys.release.tag = "'$next_release_tag'"' package.json) > package.json
+          cat <<< $(jq '.navinkumar.release.tag = "'$next_release_tag'"' package.json) > package.json
           git commit package.json -m "Bump version for next release ($release_tag -> $next_release_tag)" 
           git push
         env:

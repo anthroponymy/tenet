@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git User
-        uses: agilysys-inc/stay-github-actions/setup-git@main
+        uses: navinkumar-inc/stay-github-actions/setup-git@main
 
       - name: Release version
         continue-on-error: true
@@ -60,10 +60,10 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git User
-        uses: agilysys-inc/stay-github-actions/setup-git@main
+        uses: navinkumar-inc/stay-github-actions/setup-git@main
 
       - name: Setup NPM
-        uses: agilysys-inc/stay-github-actions/setup-nodejs@main
+        uses: navinkumar-inc/stay-github-actions/setup-nodejs@main
         with:
           token: ${{ secrets.AZDO_PMS_FEED_TOKEN }}
           node-version: 20

@@ -39,10 +39,10 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git User
-        uses: agilysys-inc/stay-github-actions/setup-git@main
+        uses: 
 
       - name: Setup NPM
-        uses: agilysys-inc/stay-github-actions/setup-nodejs@main
+        uses: 
         with:
           token: ${{ secrets.AZDO_PMS_FEED_TOKEN }}
           node-version: 20
@@ -57,7 +57,7 @@ jobs:
         working-directory: ${{ matrix.app-dir }}
         shell: bash
         run: |
-          disable_dist_install="$(jq -r .agilysys.workflow.docker.disableDistNPMInstall package.json)"
+          disable_dist_install="$(jq -r .navinkumar.workflow.docker.disableDistNPMInstall package.json)"
           if ! [[ "$disable_dist_install" =~ [Tt]rue ]]; then
             cp package*.json dist/
             cd dist/
@@ -74,7 +74,7 @@ jobs:
           ver_patch=$(echo "$package_version" | cut -d'.' -f 3)
           ver_prerelease=$(echo "$package_version" | cut -d'.' -f 4)
           package_name=$(jq -r '.name' package.json)
-          image_name="$(echo ${package_name/@agilysys-} | tr '/' '-')"
+          image_name="$(echo ${package_name/@navinkumar-} | tr '/' '-')"
           tags=()
           if [[ -n "$ver_prerelease" ]]; then
             unstable_tag="$(echo '${{ github.ref_name }}' | tr '/' '-')"

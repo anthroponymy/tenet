@@ -24,10 +24,10 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git User
-        uses: agilysys-inc/stay-github-actions/setup-git@main
+        uses:  
 
       - name: Setup NPM
-        uses: agilysys-inc/stay-github-actions/setup-nodejs@main
+        uses: 
         with:
           token: ${{ secrets.AZDO_PMS_FEED_TOKEN }}
           node-version: ${{ matrix.node-version }}
