@@ -24,12 +24,13 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git User
-        uses:  
+        run: |
+          git config --global user.name 'anthroponymy'
+          git config --global user.email 'ksnavinkumar.diary@gmail.com'
 
-      - name: Setup NPM
-        uses: 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          token: ${{ secrets.AZDO_PMS_FEED_TOKEN }}
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
