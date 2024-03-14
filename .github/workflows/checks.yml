@@ -32,6 +32,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
+          git config --global user.name 'anthroponymy'
+          git config --global user.email 'ksnavinkumar.diary@gmail.com'
           npm ci
           npm run build-all
 
