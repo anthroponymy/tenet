@@ -1,0 +1,46 @@
+name: Next Release
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  nextrelease:
+    name: Update versions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Git User
+        uses: agilysys-inc/stay-github-actions/setup-git@main
+
+      - name: Trigger GitHub release
+        shell: bash
+        run: |
+          release_tag="$(jq -r '.agilysys.release.tag' package.json)"
+          gh release create "$release_tag" --generate-notes
+          cat <<< $(jq '.agilysys.release.number += 1' package.json) > package.json
+          next_release_number="$(jq -r '.agilysys.release.number' package.json)"
+          next_release_tag="$(printf "r%s" "$next_release_number")"
+          cat <<< $(jq '.agilysys.release.tag = "'$next_release_tag'"' package.json) > package.json
+          git commit package.json -m "Bump version for next release ($release_tag -> $next_release_tag)" 
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare next development version
+        run: |
+          npm run next-release
+
+      - name: Merge ${{ github.base_ref }} back to develop
+        shell: bash
+        run: |
+          git checkout develop
+          git pull
+          git fetch origin "${{ github.base_ref }}"
+          git merge FETCH_HEAD --no-ff -m "Auto-merge main back to develop"
+          git push

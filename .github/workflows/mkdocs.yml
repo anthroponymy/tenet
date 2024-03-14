@@ -1,0 +1,63 @@
+name: GitHub pages
+
+on:
+  push:
+    branches: ["develop"]
+    paths: ["starters/**", "mkdocs/**"]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - name: Compile docs
+        shell: bash
+        working-directory: mkdocs
+        run: |
+          set -e
+          pip install \
+            mkdocs==1.4.3 \
+            mkdocs-material \
+            mkdocs-mermaid2-plugin \
+            mkdocs-build-plantuml-plugin \
+            plantuml-markdown \
+            mkdocs-print-site-plugin \
+            mkdocs-drawio-exporter \
+            mkdocstrings \
+            mkdocs-git-revision-date-localized-plugin \
+            mkdocs-awesome-pages-plugin \
+            mkdocs-redirects \
+            mkdocs-exclude
+          mkdocs build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: mkdocs/site/
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
