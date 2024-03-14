@@ -24,12 +24,12 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git User
-        run: |
+        uses: |
           git config --global user.name 'anthroponymy'
           git config --global user.email 'ksnavinkumar.diary@gmail.com'
 
       - name: Setup NPM
-        run: |
+        uses: |
           git config --global user.name 'anthroponymy'
           git config --global user.email 'ksnavinkumar.diary@gmail.com'
 
