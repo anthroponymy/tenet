@@ -23,13 +23,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Git User
-        uses: webfactory/ssh-agent@v0.5.3
-
-      - name: Setup NPM
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
         run: |
           git config --global user.name 'anthroponymy'
