@@ -5,17 +5,11 @@
     "apps/*"
   ],
   "devDependencies": {
-    "@stylistic/eslint-plugin-ts": "^1.6.3",
-    "@types/lodash": "^4.14.202",
     "copyfiles": "^2.4.1",
     "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "husky": "^9.0.10",
     "lerna": "^8.1.2",
-    "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
-    "typescript-eslint": "^7.1.1"
+    "husky": "^9.0.10"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
@@ -36,7 +30,8 @@
     "release-version-fallback": "lerna version --conventional-commits --yes",
     "relink": "cd node_modules && mv \\@navinkumar-stay x && mv x \\@navinkumar-stay",
     "test": "lerna run --since --include-merged-tags test",
-    "test-all": "lerna run test"
+    "test-all": "lerna run test",
+    "docs": "lerna run docs"
   },
   "dependencies": {
     "jest": "^29.7.0"
