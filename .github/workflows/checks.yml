@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Build
 run-name: ${{ github.actor }} the usual suspect 🚀.
 on: [push]
 jobs:
