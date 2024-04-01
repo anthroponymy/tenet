@@ -2,7 +2,6 @@
   "name": "core",
   "version": "0.0.1",
   "description": "The base framework to get start with this application",
-  
   "keywords": [
     "core"
   ],
@@ -42,6 +41,7 @@
     "url": "https://github.com/anthroponymy/tenet/issues"
   },
   "devDependencies": {
+    "@mxssfd/typedoc-theme": "^1.1.3",
     "@types/node": "^20.11.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
