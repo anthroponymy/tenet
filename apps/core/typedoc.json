@@ -1,5 +1,11 @@
 {
     "$schema": "https://typedoc.org/schema.json",
     "plugin": ["@mxssfd/typedoc-theme"],
-    "theme": "my-theme"
+    "theme": "my-theme",
+    "parametersFormat": "table",
+    "propertiesFormat": "table",
+    "enumMembersFormat": "table",
+    "typeDeclarationFormat": "table",
+    "indexFormat": "table",
+    "readme": "none"
   }
