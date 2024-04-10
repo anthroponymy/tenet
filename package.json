@@ -12,11 +12,11 @@
   "devDependencies": {
     "copyfiles": "^2.4.1",
     "dotenv": "^16.4.5",
-    "lerna": "^8.1.2",
-    "rimraf": "^5.0.5",
     "husky": "^9.0.10",
     "jasypt": "^1.0.7",
+    "lerna": "^6.4.1",
     "mongodb": "^6.3.0",
+    "rimraf": "^5.0.5",
     "yaml": "^2.3.4"
   },
   "scripts": {

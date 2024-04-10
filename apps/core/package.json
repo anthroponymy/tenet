@@ -27,7 +27,7 @@
     "build:copy-files": "copyfiles ./adapter.yml ./dist && copyfiles ./schema/*.avsc ./dist",
     "check": "tsc --pretty --noEmit --project ./tsconfig.json",
     "check:itest": "tsc --pretty --noEmit --project ./tsconfig-itest.json",
-    "clean": "rimraf ./dist ./node_modules ./coverage ../../docs",
+    "clean": "rimraf ./dist ./node_modules ./coverage",
     "coverage": "c8 -reporter=text-lcov npm run test > lcov.info",
     "dist": "rimraf ./dist && npm run build",
     "itest": "DOTENV_CONFIG_PATH=.env.itest mocha --config itest/.mocharc.json",
@@ -35,7 +35,7 @@
     "start": "node --loader ts-node/esm -r dotenv/config src/app.ts",
     "start:dev": "NODE_OPTIONS=--openssl-legacy-provider nodemon --watch src --exec node --loader ts-node/esm -r dotenv/config src/app.ts",
     "test": "mocha --config test/.mocharc.json",
-    "docs": "typedoc --out ../../docs ./src/*.ts"
+    "docs": "rimraf ../../docs && typedoc --out ../../docs ./src/*.ts"
   },
   "bugs": {
     "url": "https://github.com/anthroponymy/tenet/issues"
