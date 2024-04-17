@@ -32,7 +32,7 @@
     "dist": "rimraf ./dist && npm run build",
     "itest": "DOTENV_CONFIG_PATH=.env.itest mocha --config itest/.mocharc.json",
     "prepublishOnly": "npm run build",
-    "start": "node --loader ts-node/esm -r dotenv/config src/app.ts",
+    "start": "node --loader ts-node/esm -r ../dist/app.ts",
     "start:dev": "NODE_OPTIONS=--openssl-legacy-provider nodemon --watch src --exec node --loader ts-node/esm -r dotenv/config src/app.ts",
     "test": "mocha --config test/.mocharc.json",
     "docs": "rimraf ../../docs && typedoc --out ../../docs ./src/*.ts"
@@ -54,7 +54,7 @@
     "eslint-plugin-tsdoc": "^0.2.17",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "tsc-watch": "^6.0.4",
+    "tsc-watch": "^6.2.0",
     "typedoc": "^0.25.12",
     "typescript": "^5.4.2"
   },
@@ -71,7 +71,6 @@
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "path": "^0.12.7",
-    "tsc-watch": "^6.0.4",
     "tslib": "^2.6.2"
   }
 }

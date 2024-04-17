@@ -1,7 +1,6 @@
 import { ADDRESSESLINEORDERCONSTANTS, AUDITLOGAPTHCONSTANTS } from "./constants";
 import type { Change, ChangeGroup, Logs, Node, Event } from "./model";
 
-
 export class AuditLog {
     constructor() {
         console.log("AuditLog");
@@ -46,8 +45,11 @@ export class AuditLog {
             if (matchingEvent) {
                 eventLog.push(matchingEvent.name);
             } else {
-                eventLog.push(event.name);
+                eventLog.push(AuditLog.toAuditLogCase({
+                    entityType: event.name
+                }));
             }
+
             if (event.attributes) {
                 event.attributes.map((attribute) => {
                     const pathValue = attribute.path.map((path) => path.value).join(" ");
@@ -56,11 +58,12 @@ export class AuditLog {
                         .join("_");
                     eventLog.push(
                         `${AuditLog.toAuditLogCase({
-                            entityType: pathValue,
-                        })}${AuditLog.toCamelCase({ entityType: lineValue })}`,
+                            entityType: AuditLog.toCamelCase({ entityType: pathValue }),
+                        })} ${AuditLog.toCamelCase({ entityType: lineValue })}`,
                     );
                 });
             }
+
         }
         return eventLog;
     }
@@ -150,12 +153,15 @@ export class AuditLog {
                         return AuditLog.toCamelCase({ entityType: path.value });
                     })
                     .join("");
-                const lineValue = change.path
+                const lineValue = `${change.path
                     .slice(change.path.length - 1, change.path.length)
                     .map((path) => {
                         return AuditLog.toCamelCase({ entityType: path.value });
                     })
-                    .join("/");
+                    .join("/")} `;
+                const lineValue_ = change.path.map((path) => 
+                { return AuditLog.toCamelCase({ entityType: path.value });})
+                .join("/");
                 const pathValue = `${change.type}${key}${path}`;
                 if (previousPath === "" || previousPath !== pathValue) {
                     previousPath = pathValue;
@@ -165,32 +171,29 @@ export class AuditLog {
                 } else {
                     isSamePath = true;
                 }
+
                 switch (change.type) {
                     case "ADD":
                         extralog = !isSamePath
                             ? `${AuditLog.getOperationDescription({
-                                operation: change.type,
-                            })} ${AuditLog.toCamelCase({
-                                entityType: key,
-                            })}/${lineValue} ${change.to}`
+                                operation: change.type
+                            })} ${lineValue_}- ${change.to}`
                             : `${extralog}, ${lineValue}- ${change.to}`;
                         break;
                     case "UPDATE":
                         combinedChanges.push(
                             `${AuditLog.toCamelCase({
-                                entityType: key,
-                            })}/${lineValue} ${AuditLog.getOperationDescription({
-                                operation: change.type,
-                            })} from ${change.from} to ${change.to}`,
+                                entityType: key
+                            })} ${AuditLog.getOperationDescription({
+                                operation: change.type
+                            })} from ${change.from} to ${change.to}`
                         );
                         break;
                     case "REMOVE":
                         extralog = !isSamePath
                             ? `${AuditLog.getOperationDescription({
-                                operation: change.type,
-                            })} ${AuditLog.toCamelCase({
-                                entityType: key,
-                            })}/${lineValue}- ${change.from}`
+                                operation: change.type
+                            })} ${lineValue_} ${change.from}`
                             : `${extralog}, ${lineValue}- ${change.from}`;
                         break;
                 }
@@ -208,17 +211,17 @@ export class AuditLog {
      */
     static toCamelCase({ entityType }: { entityType: string }): string {
         // Split the string into words
-        const words = entityType.split(/(?=[A-Z])/);
+        let words = entityType.replace(/([A-Z])/g, ' $1');
+
+        if (entityType === entityType.toUpperCase()) {
+            return entityType;
+        }
 
         // Map each word to its camel case version, unless it's already in uppercase
-        const camelCasedWords = words.map((word) =>
-            word === word.toUpperCase()
-                ? word
-                : word[0].toUpperCase() + word.slice(1).toLowerCase(),
-        );
+        words = words.charAt(0).toUpperCase() + words.slice(1);
 
         // Join the words back together
-        return camelCasedWords.join("");
+        return words;
     }
 
     /**
@@ -232,7 +235,7 @@ export class AuditLog {
         entityTypeValue =
             AUDITLOGAPTHCONSTANTS.CHANGES.find((change) => {
                 return change.type === entityType;
-            })?.name ?? "";
+            })?.name ?? entityTypeValue;
         if (entityTypeValue === undefined) {
             if (entityType === entityType.toUpperCase()) {
                 return entityType;
@@ -267,7 +270,7 @@ export class AuditLog {
     static processLogNode(node: Node): Logs {
         return {
             entityName: AuditLog.toCamelCase({ entityType: node.type ?? "" }),
-            label: AuditLog.toCamelCase({ entityType: node.label ?? "" }),
+            label: node.label,
             changeCount: (node.changes?.length || 0),
             user: node.user,
             dateTime: node.timestamp,

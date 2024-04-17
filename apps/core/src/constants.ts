@@ -1,6 +1,6 @@
-export const RESPONSE_TOPIC: string = "hotel-ops.ara.pms-navinkumar.audit-log-response-events";
+export const RESPONSE_TOPIC: string = "hotel-ops.ara.pms-agilysys.audit-log-response-events";
 
-export const REQUEST_TOPIC: string = "hotel-ops.ara.pms-navinkumar.audit-log-request-events";
+export const REQUEST_TOPIC: string = "hotel-ops.ara.pms-agilysys.audit-log-request-events";
 
 export const INVALID_REQUEST_BODY: string = "Request body is not valid";
 
