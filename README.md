@@ -1,6 +1,9 @@
 # Tenet
 A project to learn 
 
+https://antonz.org/git-by-example/?ref=dailydev
+
+https://www.lydiahallie.com/blog/promise-execution?ref=dailydev
 
 [![Build](https://github.com/anthroponymy/tenet/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/anthroponymy/tenet/actions/workflows/checks.yml)
 [![Deployment](https://github.com/anthroponymy/tenet/actions/workflows/checks.yml/badge.svg?branch=main&event=deployment)](https://github.com/anthroponymy/tenet/actions/workflows/checks.yml)
